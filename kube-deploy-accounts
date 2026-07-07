@@ -1,0 +1,4 @@
+pod/accounts-7f89bcd64-x9z2y      1/1     Running   0          5m
+service/accounts                  ClusterIP   172.30.12.34   <none>        8080/TCP   5m
+deployment.apps/accounts          1/1     1            1          5m
+replicaset.apps/accounts-7f89bc   1       1            1          5m

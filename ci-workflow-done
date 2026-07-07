@@ -1,0 +1,8 @@
+✓ Set up job
+✓ Checkout Code
+✓ Set up Python
+✓ Install Dependencies
+✓ Run Linter (Flake8)
+✓ Run Unit Tests
+✓ Post Checkout Code
+✓ Complete job

@@ -1,0 +1,8 @@
+$ curl -i -X POST -H "Content-Type: application/json" -d '{"name": "Alice", "email": "alice@gmail.com", "address": "123 Lane", "phone": "555-1234"}' http://localhost:5000/accounts
+
+HTTP/1.0 201 CREATED
+Content-Type: application/json
+Content-Length: 104
+Access-Control-Allow-Origin: *
+
+{"address": "123 Lane", "email": "alice@gmail.com", "id": 1, "name": "Alice", "phone": "555-1234"}

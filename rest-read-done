@@ -1,0 +1,8 @@
+$ curl -i -X GET http://localhost:5000/accounts/1
+
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 104
+Access-Control-Allow-Origin: *
+
+{"address": "123 Lane", "email": "alice@gmail.com", "id": 1, "name": "Alice", "phone": "555-1234"}

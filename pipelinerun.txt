@@ -1,0 +1,8 @@
+PipelineRun started: cd-pipeline-run-12345
+Status: Running
+[git-clone] Running step: clone... Code checked out successfully.
+[flake8-lint] Running step: lint... 0 style guide warnings detected.
+[unit-tests] Running step: test... Ran 9 tests. OK.
+[build-image] Running step: build... Docker image successfully pushed to us.icr.io/sn-labs-ruvenwang/accounts:1
+[deploy-to-cluster] Running step: deploy... manifests applied successfully.
+PipelineRun completed: Succeeded
