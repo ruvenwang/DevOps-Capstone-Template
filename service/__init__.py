@@ -15,7 +15,7 @@ talisman = Talisman(app)
 
 # Import routes and models after app initialization to prevent circular dependencies
 from service import routes, models
-from service.utils import error_handlers
+from service.common import error_handlers
 
 # Set up logging level
 app.logger.setLevel(logging.INFO)
