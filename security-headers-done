@@ -5,10 +5,11 @@ test_get_account_not_found (tests.test_routes.TestAccountService) ... ok
 test_health (tests.test_routes.TestAccountService) ... ok
 test_index (tests.test_routes.TestAccountService) ... ok
 test_list_accounts (tests.test_routes.TestAccountService) ... ok
+test_security_headers (tests.test_routes.TestAccountService) ... ok
 test_update_account (tests.test_routes.TestAccountService) ... ok
 test_update_account_not_found (tests.test_routes.TestAccountService) ... ok
 
 ----------------------------------------------------------------------
-Ran 9 tests in 0.412s
+Ran 10 tests in 0.485s
 
 OK
