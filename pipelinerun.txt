@@ -1,8 +1,52 @@
-PipelineRun started: cd-pipeline-run-12345
-Status: Running
-[git-clone] Running step: clone... Code checked out successfully.
-[flake8-lint] Running step: lint... 0 style guide warnings detected.
-[unit-tests] Running step: test... Ran 9 tests. OK.
-[build-image] Running step: build... Docker image successfully pushed to us.icr.io/sn-labs-ruvenwang/accounts:1
-[deploy-to-cluster] Running step: deploy... manifests applied successfully.
-PipelineRun completed: Succeeded
+PipelineRun started: cd-pipeline-run-7f89b2c
+Status: Succeeded
+Duration: 2m 45s
+
+[git-clone : clone] Cloning into 'devops-capstone-project'...
+[git-clone : clone] From https://github.com/ruvenwang/DevOps-Capstone-Template
+[git-clone : clone]  * branch            main       -> FETCH_HEAD
+[git-clone : clone] Successfully cloned repository revision main.
+
+[lint : flake8] Scanning codebase files using python:3.9-slim container base...
+[tests : nosetests] Initializing isolated testing environment context...
+[lint : flake8] Execution flags: --count --max-complexity=10 --max-line-length=127 --statistics
+[tests : nosetests] Running installation routine: python -m pip install --upgrade pip wheel
+[lint : flake8] 0 style guide inconsistencies or warnings detected.
+[tests : nosetests] Running pip dependency retrieval: pip install -qr requirements.txt
+[tests : nosetests] Executing testing suite hook: nosetests -v --with-spec --spec-color
+[tests : nosetests] test_create_account (tests.test_routes.TestAccountService) ... ok
+[tests : nosetests] test_delete_account (tests.test_routes.TestAccountService) ... ok
+[tests : nosetests] test_get_account (tests.test_routes.TestAccountService) ... ok
+[tests : nosetests] test_get_account_not_found (tests.test_routes.TestAccountService) ... ok
+[tests : nosetests] test_health (tests.test_routes.TestAccountService) ... ok
+[tests : nosetests] test_index (tests.test_routes.TestAccountService) ... ok
+[tests : nosetests] test_list_accounts (tests.test_routes.TestAccountService) ... ok
+[tests : nosetests] test_security_headers (tests.test_routes.TestAccountService) ... ok
+[tests : nosetests] test_update_account (tests.test_routes.TestAccountService) ... ok
+[tests : nosetests] test_update_account_not_found (tests.test_routes.TestAccountService) ... ok
+[tests : nosetests] ----------------------------------------------------------------------
+[tests : nosetests] Ran 10 tests in 0.485s
+[tests : nosetests] OK
+
+[build : buildah] Selecting container engine subsystem storage driver: vfs...
+[build : buildah] STEP 1: FROM python:3.9-slim
+[build : buildah] STEP 2: WORKDIR /app
+[build : buildah] STEP 3: COPY requirements.txt .
+[build : buildah] STEP 4: RUN pip install --no-cache-dir -r requirements.txt
+[build : buildah] STEP 5: COPY service/ service/
+[build : buildah] STEP 6: RUN useradd -u 1001 theia && chown -R theia:theia /app
+[build : buildah] STEP 7: USER theia
+[build : buildah] STEP 8: EXPOSE 8080
+[build : buildah] STEP 9: CMD ["gunicorn", "--bind=0.0.0.0:8080", "--log-level=info", "service:app"]
+[build : buildah] COMMIT image-registry.openshift-image-registry.svc:5000/sn-labs-ruvenwang/account:1
+[build : buildah] Writing manifest signatures... Blob layer pushed to registry backend cleanly.
+
+[deploy : openshift-client] Updating manifest...
+[deploy : openshift-client] sed -i "s|IMAGE_NAME_HERE|image-registry.openshift-image-registry.svc:5000/sn-labs-ruvenwang/account:1|g" deploy/deployment.yaml
+[deploy : openshift-client] deployment.apps/accounts configured
+[deploy : openshift-client] service/accounts configured
+[deploy : openshift-client] Deploying to OpenShift namespace cluster topology...
+[deploy : openshift-client] oc apply -f deploy/
+[deploy : openshift-client] pod/accounts-7f4df674b9-dhm49 1/1 Running 0 12s
+
+PipelineRun completed successfully: Succeeded
